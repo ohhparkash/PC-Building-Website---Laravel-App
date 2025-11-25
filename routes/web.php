@@ -5,6 +5,8 @@ use App\Http\Controllers\BuilderController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PreBuiltController;
+use App\Http\Controllers\ComponentController;
+use App\Http\Controllers\ComponentCatalogController;
 
 // Home Page
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -26,3 +28,13 @@ Route::get('/cart/reset', [CartController::class, 'reset'])->name('cart.reset');
 // Checkout Page
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
+
+// Component Catalog (Frontend)
+Route::get('/components', [ComponentCatalogController::class, 'index'])->name('components.catalog');
+
+// Admin Component Management
+Route::redirect('/admin', '/admin/components');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('components', ComponentController::class)->except(['show']);
+});

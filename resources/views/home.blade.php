@@ -52,4 +52,36 @@
         </div>
     </div>
 </section>
+
+@if(isset($featuredComponents) && $featuredComponents->isNotEmpty())
+<section class="py-5" style="background: #0f0f0f;">
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+            <div>
+                <p class="text-uppercase text-white-50 small mb-1">Inventory Spotlight</p>
+                <h2 class="text-white mb-0">Featured Components</h2>
+            </div>
+            <a href="{{ route('components.catalog') }}" class="btn btn-outline-warning">View All Components</a>
+        </div>
+        <div class="row g-4">
+            @foreach($featuredComponents as $component)
+            <div class="col-md-6 col-xl-3">
+                <div class="card h-100" style="background:#1a1a1a; border: 1px solid #333;">
+                    @if($component->image_url)
+                        <img src="{{ $component->image_url }}" class="card-img-top" alt="{{ $component->name }}" style="height:180px; object-fit:cover;">
+                    @endif
+                    <div class="card-body text-white">
+                        <span class="badge bg-warning text-dark mb-2">{{ $component->category }}</span>
+                        <h5 class="card-title">{{ $component->name }}</h5>
+                        <p class="text-white-50 small mb-2">{{ \Illuminate\Support\Str::limit($component->short_description, 80) }}</p>
+                        <p class="fw-bold mb-1">PKR {{ number_format($component->price, 0) }}</p>
+                        <p class="text-white-50 small mb-0">In stock: {{ $component->stock }}</p>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
 @endsection

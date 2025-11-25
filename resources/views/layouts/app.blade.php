@@ -21,9 +21,11 @@
             <a class="fw-bold text-gold text-decoration-none" href="{{ route('home') }}">AshBuilds</a>
             <ul class="d-none d-md-flex list-unstyled m-0 gap-3">
                 <li><a class="nav-link p-0" href="{{ route('home') }}">Home</a></li>
+                <li><a class="nav-link p-0" href="{{ route('components.catalog') }}">Components</a></li>
                 <li><a class="nav-link p-0" href="{{ route('prebuilt') }}">Pre-Built PCs</a></li>
                 <li><a class="nav-link p-0" href="{{ route('builder') }}">PC Builder</a></li>
                 <li><a class="nav-link p-0" href="{{ route('checkout') }}">Checkout</a></li>
+                <li><a class="nav-link p-0 text-warning" href="{{ route('admin.components.index') }}">Admin</a></li>
             </ul>
         </nav>
     </header>

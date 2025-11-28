@@ -16,13 +16,15 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::updateOrCreate(
-            ['email' => 'admin@ashbuilds.test'],
-            [
-                'name' => 'admin',
-                'password' => Hash::make('pk7h1g66'),
-                'is_admin' => true,
-            ]
-        );
+        // Delete existing admin user first
+        User::where('email', 'admin@ashbuilds.test')->delete();
+        
+        // Create fresh admin user
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@ashbuilds.test',
+            'password' => 'admin123',
+            'is_admin' => true,
+        ]);
     }
 }

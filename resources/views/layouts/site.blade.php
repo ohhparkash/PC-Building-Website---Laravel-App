@@ -19,7 +19,7 @@
     <header class="border-bottom border-800">
         <nav class="container py-3 d-flex align-items-center justify-content-between flex-wrap gap-3">
             <a class="fw-bold text-gold text-decoration-none" href="{{ route('home') }}">AshBuilds</a>
-            <ul class="d-flex list-unstyled m-0 gap-3 align-items-center flex-wrap">
+            <ul class="d-flex list-unstyled m-0 gap-3 align-items-center flex-wrap" style="margin-right: auto !important; margin-left: 2rem !important;">
                 <li><a class="nav-link p-0" href="{{ route('home') }}">Home</a></li>
                 <li><a class="nav-link p-0" href="{{ route('components.catalog') }}">Components</a></li>
                 <li><a class="nav-link p-0" href="{{ route('prebuilt') }}">Pre-Built PCs</a></li>
@@ -29,17 +29,20 @@
                     @if(auth()->user()->is_admin)
                         <li><a class="nav-link p-0 text-warning" href="{{ route('admin.components.index') }}">Admin</a></li>
                     @endif
-                    <li class="ms-2">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="btn btn-sm btn-outline-light">Logout</button>
-                        </form>
-                    </li>
-                @else
-                    <li><a class="nav-link p-0" href="{{ route('login') }}">Login</a></li>
-                    <li><a class="nav-link p-0" href="{{ route('register') }}">Register</a></li>
                 @endauth
             </ul>
+            <div class="d-flex align-items-center gap-3">
+                @auth
+                    <span class="text-white-50 small">Welcome, <span class="text-warning fw-semibold">{{ auth()->user()->name }}</span></span>
+                    <form method="POST" action="{{ route('logout') }}" class="m-0">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-outline-light">Logout</button>
+                    </form>
+                @else
+                    <a class="nav-link p-0" href="{{ route('login') }}">Login</a>
+                    <a class="nav-link p-0" href="{{ route('register') }}">Register</a>
+                @endauth
+            </div>
         </nav>
     </header>
 
